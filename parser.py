@@ -23,8 +23,6 @@ PP -> P NP
 AdjSeq -> Adj | Adj AdjSeq
 """
 
-# VP -> V | V NP | V Adv | Adv V | V PP | V PP Adv | V Det | V Det VP | V Det NP
-
 grammar = nltk.CFG.fromstring(NONTERMINALS + TERMINALS)
 parser = nltk.ChartParser(grammar)
 
