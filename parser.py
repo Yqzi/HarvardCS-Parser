@@ -82,14 +82,15 @@ def np_chunk(tree):
     noun phrases as subtrees.
     """
     pTree = nltk.ParentedTree.convert(tree)
-    all_np_positions = []
-
+    np_list = []
+    
     for subtree in pTree.subtrees():
         if subtree.label() == 'NP':
-            all_np_positions.append(subtree.treeposition())
-    
-    print(all_np_positions)
+            if not any(sub.label() == 'NP' for sub in subtree.subtrees()):
+                np_list.append(subtree)
 
-
+    return np_list
+        
+            
 if __name__ == "__main__":
     main()
