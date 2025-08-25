@@ -84,10 +84,9 @@ def np_chunk(tree):
     pTree = nltk.ParentedTree.convert(tree)
     np_list = []
     
-    for subtree in pTree.subtrees():
-        if subtree.label() == 'NP':
-            if not any(sub.label() == 'NP' for sub in subtree.subtrees()):
-                np_list.append(subtree)
+    for subtree in pTree.subtrees(filter=lambda pTree: pTree.label() == 'NP'):
+        if not any(sub.label() == 'NP' for sub in list(subtree.subtrees())[1:]):
+            np_list.append(subtree)
 
     return np_list
         
